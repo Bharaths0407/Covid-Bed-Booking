@@ -1,3 +1,12 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1
+-- Generation Time: Jan 15, 2023 at 12:45 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
@@ -9,8 +18,18 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `covid`
+-- Database: `dbms`
 --
+
+DELIMITER $$
+--
+-- Procedures
+--
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getPatientDetails` (IN `inp` VARCHAR(50))  NO SQL SELECT pname,pphone,srfid,bedtype,paddress FROM bookingpatient WHERE hcode=inp$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `getUsers` ()  NO SQL SELECT * FROM user$$
+
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -27,15 +46,7 @@ CREATE TABLE `bookingpatient` (
   `pname` varchar(50) NOT NULL,
   `pphone` varchar(12) NOT NULL,
   `paddress` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `bookingpatient`
---
-
-INSERT INTO `bookingpatient` (`id`, `srfid`, `bedtype`, `hcode`, `spo2`, `pname`, `pphone`, `paddress`) VALUES
-(3, 'KA20210011', 'ICUBed', 'MAT123', 85, 'ARK', '9986786453', 'BANGALORE'),
-(4, 'KA20210022', 'ICUBed', 'BBH01', 92, 'kartik', '8088131784', 'banaglore ');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -51,14 +62,7 @@ CREATE TABLE `hospitaldata` (
   `hicubed` int(11) NOT NULL,
   `icubed` int(11) NOT NULL,
   `vbed` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `hospitaldata`
---
-
-INSERT INTO `hospitaldata` (`id`, `hcode`, `hname`, `normalbed`, `hicubed`, `icubed`, `vbed`) VALUES
-(3, 'MAT123', 'Matha Hospital', 40, 4, 4, 1);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Triggers `hospitaldata`
@@ -87,15 +91,7 @@ CREATE TABLE `hospitaluser` (
   `hcode` varchar(20) NOT NULL,
   `email` varchar(100) NOT NULL,
   `password` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `hospitaluser`
---
-
-INSERT INTO `hospitaluser` (`id`, `hcode`, `email`, `password`) VALUES
-(7, 'BBH01', 'aneesrehman95567@gmail.com', 'pbkdf2:sha256:260000$im6PllE9qrd0asQY$3e62fcb9697d2b048acd83cb3658bac8ae5edb5ff58086699d134fb0ed41d788'),
-(9, 'MAT123', 'arkprocoder@gmail.com', 'pbkdf2:sha256:260000$CPDXGkSY1zXsarEA$fdbec84d1b2c32e521c75f51bb917daaa4f7a53e567e4478d23ba944c53b1177');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -106,15 +102,7 @@ INSERT INTO `hospitaluser` (`id`, `hcode`, `email`, `password`) VALUES
 CREATE TABLE `test` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `test`
---
-
-INSERT INTO `test` (`id`, `name`) VALUES
-(1, 'anees'),
-(2, 'rehman');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -131,15 +119,16 @@ CREATE TABLE `trig` (
   `vbed` int(11) NOT NULL,
   `querys` varchar(50) NOT NULL,
   `date` date NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `trig`
 --
 
 INSERT INTO `trig` (`id`, `hcode`, `normalbed`, `hicubed`, `icubed`, `vbed`, `querys`, `date`) VALUES
-(1, 'BBH01', 50, 9, 2, 1, ' UPDATED', '2021-11-26'),
-(2, 'BBH01', 50, 9, 2, 1, ' DELETED', '2021-11-26');
+(15, '001', 20, 10, 5, 10, ' INSERTED', '2023-01-07'),
+(16, '001', 20, 10, 4, 10, ' UPDATED', '2023-01-07'),
+(17, '001', 20, 10, 4, 10, ' DELETED', '2023-01-07');
 
 -- --------------------------------------------------------
 
@@ -152,15 +141,7 @@ CREATE TABLE `user` (
   `srfid` varchar(20) NOT NULL,
   `email` varchar(100) NOT NULL,
   `dob` varchar(1000) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `user`
---
-
-INSERT INTO `user` (`id`, `srfid`, `email`, `dob`) VALUES
-(9, 'KA20210011', 'ark@gmail.com', 'pbkdf2:sha256:260000$AhqgDCims0G1LSEi$ada839cc254cd79f9708e777ae02d83cec210677c342e01c3affd8c1358775d9'),
-(10, 'KA20210022', 'rehman@gmail.com', 'pbkdf2:sha256:260000$74GEC2qyVtOiPl5s$2a95f811bbd5a50eaac0404fb8fa3682b6c3b67f4493037134c9672393136694');
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -213,19 +194,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `bookingpatient`
 --
 ALTER TABLE `bookingpatient`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `hospitaldata`
 --
 ALTER TABLE `hospitaldata`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `hospitaluser`
 --
 ALTER TABLE `hospitaluser`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `test`
@@ -237,13 +218,13 @@ ALTER TABLE `test`
 -- AUTO_INCREMENT for table `trig`
 --
 ALTER TABLE `trig`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
