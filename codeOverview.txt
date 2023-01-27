@@ -9,4 +9,3 @@ The system also includes a back-end system that manages the underlying data and 
 In addition, the system can include features such as appointment scheduling, automated notifications and alerts, and reporting and analytics capabilities. These features can be used to improve the efficiency and effectiveness of the system and help hospital staff manage the ongoing COVID-19 pandemic.
 
 Overall, a Covid bed slot booking DBMS project is a powerful tool that can help hospitals manage the allocation of beds to COVID-19 patients, and improve the overall efficiency and effectiveness of their operations during the pandemic.
-
