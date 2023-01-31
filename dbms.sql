@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 15, 2023 at 12:45 PM
+-- Generation Time: Jan 31, 2023 at 05:11 PM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `dbms`
+-- Database: `dd`
 --
 
 DELIMITER $$
@@ -120,15 +120,6 @@ CREATE TABLE `trig` (
   `querys` varchar(50) NOT NULL,
   `date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `trig`
---
-
-INSERT INTO `trig` (`id`, `hcode`, `normalbed`, `hicubed`, `icubed`, `vbed`, `querys`, `date`) VALUES
-(15, '001', 20, 10, 5, 10, ' INSERTED', '2023-01-07'),
-(16, '001', 20, 10, 4, 10, ' UPDATED', '2023-01-07'),
-(17, '001', 20, 10, 4, 10, ' DELETED', '2023-01-07');
 
 -- --------------------------------------------------------
 

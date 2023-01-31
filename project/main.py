@@ -38,7 +38,7 @@ login_manager=LoginManager(app)
 login_manager.login_view='login'
 
 # app.config['SQLALCHEMY_DATABASE_URI']='mysql://username:password@localhost/databsename'
-app.config['SQLALCHEMY_DATABASE_URI']='mysql://root:@localhost/trial'
+app.config['SQLALCHEMY_DATABASE_URI']='mysql://root:@localhost/dbms'
 db=SQLAlchemy(app)
 
 
@@ -205,9 +205,6 @@ def hospitalUser():
             db.engine.execute(f"INSERT INTO `hospitaluser` (`hcode`,`email`,`password`) VALUES ('{hcode}','{email}','{encpassword}') ")
 
             # my mail starts from here if you not need to send mail comment the below line
-           
-            # mail.send_message('COVID CARE CENTER',sender=params['gmail-user'],recipients=[email],body=f"Welcome thanks for choosing us\nYour Login Credentials Are:\n Email Address: {email}\nPassword: {password}\n\nHospital Code {hcode}\n\n Do not share your password\n\n\nThank You..." )
-
             flash("Data Sent and Inserted Successfully","warning")
             return render_template("addHosUser.html")
 
@@ -265,13 +262,9 @@ def addhospitalinfo():
             flash("Data Is Added","primary")
             return redirect('/addhospitalinfo')
             
-
         else:
             flash("Hospital Code not Exist","warning")
             return redirect('/addhospitalinfo')
-
-
-
 
     return render_template("hospitaldata.html",postsdata=postsdata)
 
